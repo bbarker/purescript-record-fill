@@ -20,19 +20,35 @@ import Test.Unit.Main (runTest)
 import Test.Unit.Assert as Assert
 
 
-testSeqMaybe :: Maybe _
-testSeqMaybe =
-  sequencePropsOf
-    { a: Just "Hello"
-    , b: Nothing
-    , c: 42
-}
 
 main :: Effect Unit
 main = runTest do
-  suite "suite 1" do
-    test "test 1" do
-      tlog $ "add some tests"
+  suite "sequencePropsOf" do
+    test "with Maybes" do
+      testNothing :: Maybe _ <- pure $ sequencePropsOf {
+        a: Just "Hello"
+      , b: Nothing
+      , c: 42
+      }
+      Assert.equal
+        (Nothing :: Maybe {a :: String, b :: Maybe Int, c :: Int})
+        testNothing
+      testJust :: Maybe _ <- pure $ sequencePropsOf {
+        a: Just "Hello"
+      , c: 42
+      }
+      Assert.equal (Just {a: "Hello", c : 42}) testJust
+      test2xMay :: Maybe _ <- pure $ sequencePropsOf {
+        a: Just $ Just "Hello"
+      , b: Just $ Nothing
+      , c: 42
+      }
+      Assert.equal
+        ((Just {a: Just "Hello", b: Nothing, c: 42})
+         :: Maybe {a :: Maybe String, b :: Maybe Int, c :: Int})
+        test2xMay
+
+      --tlog $ "add some tests"
 
 tlog :: forall a. Show a => a -> Aff Unit
 tlog = liftEffect <<< logShow

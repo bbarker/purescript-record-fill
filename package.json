@@ -4,7 +4,7 @@
   "scripts": {
     "clean": "rimraf output && rimraf .pulp-cache",
     "build": "bower install && eslint src && pulp build -- --censor-lib --strict",
-    "test": "npm run build && pulp test"
+    "test": "pulp test"
   },
   "devDependencies": {
     "bower": "^1.8.8",
