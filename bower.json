@@ -16,15 +16,12 @@
   ],
   "dependencies": {
     "purescript-prelude": "^4.1.0",
-    "purescript-heterogeneous": "^0.3.0"
+    "purescript-heterogeneous": "https://github.com/natefaubion/purescript-heterogeneous.git#854e6fe8e52c570954c22275aaf657ef068c73f8"
   },
   "devDependencies": {
     "purescript-test-unit": "^15.0.0",
     "purescript-console": "^4.2.0",
     "purescript-debug": "^4.0.0",
     "purescript-foreign": "^5.0.0"
-  },
-  "resolutions": {
-    "purescript-record": "^2.0.0"
   }
 }

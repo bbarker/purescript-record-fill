@@ -3,15 +3,10 @@ module Data.Record.Fill where
 
 import Prelude
 
-import Data.Bifunctor (lmap)
-import Data.Either (Either(..))
-import Data.Maybe (Maybe(..))
-import Data.Symbol (class IsSymbol, SProxy, reflectSymbol)
-import Data.Tuple (Tuple(..))
-import Heterogeneous.Folding (class Folding, class FoldingWithIndex, class HFoldl, class HFoldlWithIndex, hfoldl, hfoldlWithIndex)
-import Heterogeneous.Mapping (class HMapWithIndex, class Mapping, class MappingWithIndex, hmap, hmapWithIndex, mapping)
+-- import Data.Maybe (Maybe(..))
+import Data.Symbol (class IsSymbol, SProxy)
+import Heterogeneous.Folding (class FoldingWithIndex, class HFoldlWithIndex, hfoldlWithIndex)
 import Prim.Row as Row
-import Record as Record
 import Record.Builder (Builder)
 import Record.Builder as Builder
 
@@ -60,5 +55,5 @@ sequencePropsOf :: forall f rin rout.
   f { | rout }
 sequencePropsOf =
   map (flip Builder.build {})
-<<< hfoldlWithIndex (SequencePropOf :: SequencePropOf f) (pure identity :: f (Builder {} {}))
+    <<< hfoldlWithIndex (SequencePropOf :: SequencePropOf f) (pure identity :: f (Builder {} {}))
 
